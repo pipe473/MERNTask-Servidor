@@ -5,9 +5,8 @@ const usuarioController = require('../controllers/usuarioController');
 
 // Crea un usuario
 // api/usuarios
-router.post('/', () => {
-    console.log('Creando un usuario...');
-    
-});
+router.post('/', 
+    usuarioController.crearUsuario    
+);
 
 module.exports = router;
