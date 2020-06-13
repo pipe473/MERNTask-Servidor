@@ -8,13 +8,11 @@ module.exports = function(req, res, next) {
     
 
     // Revisar si no hay token
-
     if(!token) {
         return res.status(401).json({msg: 'No hay Token, permiso no válido'});
     }
 
     // Validar el token
-
     try {
         const cifrado = jwt.verify(token, process.env.SECRETA)
         req.usuario = cifrado.usuario;
