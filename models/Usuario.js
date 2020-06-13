@@ -13,7 +13,7 @@ const UsuariosSchema = mongoose.Schema({
         unique: true
     },
     password: {
-        ttype: String,
+        type: String,
         required: true,
         trim: true
     },
