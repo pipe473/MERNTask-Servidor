@@ -9,9 +9,7 @@ exports.crearTarea = async (req, res) => {
     const errores = validationResult(req);
     if( !errores.isEmpty() ) {
         return res.status(400).json({errores: errores.array() })
-    }
-
-   
+    }   
 
     try {
 
@@ -46,7 +44,8 @@ exports.obtenerTareas = async (req, res) => {
     try {
 
         // Extrare el proyecto y comprobar si existe
-        const { proyecto } = req.body;
+        const { proyecto } = req.query;
+        
 
         const existeProyecto = await Proyecto.findById(proyecto);
         if(!existeProyecto) {
@@ -59,12 +58,12 @@ exports.obtenerTareas = async (req, res) => {
         }
 
         // Obtener las tareas por proyecto
-        const tareas = await Tarea.find({ proyecto });
+        const tareas = await Tarea.find({ proyecto }).sort({ creado: -1 });
         res.json({ tareas });
 
     } catch (error) {
         console.log(error);
-        res.status(500).send('Ha habido un error')
+        res.status(500).send('Ha habido un error');
         
     }
 }
